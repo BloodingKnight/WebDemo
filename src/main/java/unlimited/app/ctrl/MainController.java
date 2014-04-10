@@ -47,6 +47,18 @@ public class MainController extends Controller {
         forwardAction("/login");
     }
 
+    public void head() {
+        render("head.html");
+    }
+
+    public void west() {
+        render("west.html");
+    }
+
+    public void center() {
+        render("center.html");
+    }
+
     public void err401() {
         setAttr("msg", "401 Unauthorized");
         setAttr("success", false);
