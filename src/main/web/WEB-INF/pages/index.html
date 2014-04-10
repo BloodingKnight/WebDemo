@@ -1,3 +1,4 @@
+<#global cache=JspTaglibs["/WEB-INF/classes/shiro.tld"]>
 <!DOCTYPE html>
 <html>
 <head lang="zh">
@@ -6,6 +7,7 @@
 </head>
 <body>
 <h1>Index Page</h1>
+<span style="position: relative; float: right">Welcome! <@shiro.principle property="name" /></span>
 <hr />
 <h2>Ftl Test</h2>
 <#setting number_format="currency" />

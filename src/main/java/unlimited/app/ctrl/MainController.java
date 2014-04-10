@@ -17,10 +17,12 @@ public class MainController extends Controller {
 
     @RequiresAuthentication
     public void index() {
-        render("index.html");
+        render("index.jsp");
     }
 
-    public void login() {}
+    public void login() {
+        render("login.html");
+    }
 
     public void doLogin() {
         String username = getPara("username");

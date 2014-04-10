@@ -13,6 +13,7 @@ import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.IErrorRenderFactory;
 import com.jfinal.render.RedirectRender;
 import com.jfinal.render.Render;
+import com.jfinal.render.ViewType;
 
 /**
  * Created by unlimited on 2014/4/9.
@@ -27,6 +28,7 @@ public class MainConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants me) {
         loadPropertyFile("a_little_config.txt");
+        me.setViewType(ViewType.JSP);
         me.setBaseViewPath("/WEB-INF/pages/");
 //        me.setErrorView(401, "/WEB-INF/pages/login.html");
 //        me.setErrorView(403, "/WEB-INF/pages/login.html");
