@@ -19,8 +19,21 @@ public class Account extends Model<Account> {
     }
 
     public List<Role> getRoles() {
-        return Role.dao.find("select * from roles r, account_role ar " +
-                "where ar.account=? and ar.role=r.id",
+        return Role.dao.find(
+                "select * from roles r, account_role ar " +
+                        "where ar.account=? and ar.role=r.id",
+                get("id")
+        );
+    }
+
+    /**
+     * 获取用户专属的权限
+     * @return
+     */
+    public List<Permission> getSpecificPermissions() {
+        return Permission.dao.find(
+                "select * from permissions p, account_permission ap " +
+                        "where ap.account=? and ap.permission=p.id",
                 get("id"));
     }
 }

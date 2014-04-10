@@ -11,6 +11,7 @@ import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.render.IErrorRenderFactory;
+import com.jfinal.render.RedirectRender;
 import com.jfinal.render.Render;
 
 /**
@@ -32,7 +33,13 @@ public class MainConfig extends JFinalConfig {
         me.setError401View("/err401");
         me.setError403View("/err403");
         me.setError404View("/err404");
-        me.setError500View("/err405");
+        me.setError500View("/err500");
+        me.setErrorRenderFactory(new IErrorRenderFactory() {
+            @Override
+            public Render getRender(int errorCode, String view) {
+                return new RedirectRender(view);
+            }
+        });
     }
 
     @Override

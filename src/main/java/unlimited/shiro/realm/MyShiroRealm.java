@@ -13,9 +13,11 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import unlimited.app.model.Account;
+import unlimited.app.model.Permission;
 import unlimited.app.model.Role;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 自实现用户与权限查询. 演示关系，密码用明文存储，因此使用默认 的SimpleCredentialsMatcher.
@@ -61,12 +63,22 @@ public class MyShiroRealm extends AuthorizingRealm {
             List<Role> roles = user.getRoles();
             for (Role role : roles) {
                 info.addRole(role.getStr("name"));
+
+                List<Permission> permissions =  role.getPermissions();
+                for (Permission permission : permissions) {
+                    info.addStringPermission(permission.getStr("url"));
+                }
             }
-            // TODO add permission supports
-//            Role role = Role.dao.findById(user.getInt("roleid"));
-//            info.addRole(role.getStr("rolename"));
-            // info.addStringPermissions( role.getPermissions()
-            // );//如果你添加了对权限的表，打开此注释，添加角色具有的权限
+            List<Permission> permissions =  user.getSpecificPermissions();
+            for (Permission permission : permissions) {
+                info.addStringPermission(permission.getStr("url"));
+            }
+
+            Set<String> strings = info.getStringPermissions();
+            for (String string : strings) {
+                System.out.println(string);
+            }
+
 
             return info;
         } else {
